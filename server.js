@@ -20,6 +20,7 @@ connectDB().then(() => {
     try {
       const {id}=req.body
       const controls = await controlCollection.findOne({_id:new ObjectId(id)});
+      await controlCollection.updateOne({_id: new ObjectId(id)},{$set:{status:"done"}});
       res.json(controls);
     } catch (err) {
       res.status(500).json({ message: err.message });
