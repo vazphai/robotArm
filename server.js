@@ -32,7 +32,7 @@ connectDB().then(() => {
     if (!data&&!id)
       return res.status(401).status("khong co truong data va id")
     try {
-      const result = await controlCollection.updateOne({_id: new ObjectId(id)},{$set:{val}});
+      const result = await controlCollection.updateOne({_id: id},{$set:{val}});
       res.status(201).json(result);
     } catch (err) {
       res.status(400).json({ message: err.message });
