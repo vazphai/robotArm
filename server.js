@@ -18,9 +18,8 @@ connectDB().then(() => {
   // Lấy danh sách control
   app.get('/control', async (req, res) => {
     try {
-      const {id}=req.body
-      const controls = await controlCollection.findOne({_id:new ObjectId(id)});
-      await controlCollection.updateOne({_id: new ObjectId(id)},{$set:{status:"done"}});
+ 
+      const controls = await controlCollection.find().toArray();
       res.json(controls);
     } catch (err) {
       res.status(500).json({ message: err.message });
@@ -29,11 +28,11 @@ connectDB().then(() => {
 
   // Thêm một control mới
   app.post('/control', async (req, res) => {
-    const {data,id}=req.body
+    const {val,id}=req.body
     if (!data&&!id)
       return res.status(401).status("khong co truong data va id")
     try {
-      const result = await controlCollection.updateOne({_id: new ObjectId(id)},{$set:{data}});
+      const result = await controlCollection.updateOne({_id: new ObjectId(id)},{$set:{val}});
       res.status(201).json(result);
     } catch (err) {
       res.status(400).json({ message: err.message });
