@@ -28,7 +28,7 @@ connectDB().then(() => {
   // Thêm một control mới
   app.post('/control', async (req, res) => {
     const {val,id}=req.body
-    if (!data&&!id)
+    if (!val&&!id)
       return res.status(401).status("khong co truong data va id")
     try {
       const result = await controlCollection.updateOne({_id: id},{$set:{val}});
