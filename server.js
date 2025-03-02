@@ -18,8 +18,7 @@ connectDB().then(() => {
   // Lấy danh sách control
   app.get('/control', async (req, res) => {
     try {
- 
-      const controls = await controlCollection.find().toArray();
+      const controls = await db.collection('mau').find().toArray();
       res.json(controls);
     } catch (err) {
       res.status(500).json({ message: err.message });
