@@ -46,14 +46,15 @@ connectDB().then(() => {
     try {
       const result = await db.collection("mausac").updateOne(
         { _id: new ObjectId(id) },
-        { $set: data }, // Nếu muốn lưu toàn bộ data vào document
-        { upsert: true } // Thêm nếu không tồn tại
+        { $set: { data: data } }, // Đặt data vào một field cụ thể
+        { upsert: true } 
       );
       res.status(201).json(result);
     } catch (err) {
       res.status(400).json({ message: err.message });
     }
   });
+  
   
   app.listen(PORT, () => {
     console.log(`Server đang chạy tại http://localhost:${PORT}`);
