@@ -13,7 +13,7 @@ app.use(cors());
 // Kết nối với MongoDB trước khi chạy server
 connectDB().then(() => {
   const db = getDB();
-  const controlCollection = db.collection('control');
+  const controlCollection = db.collection('mau');
 
   // Lấy danh sách control
   app.get('/control', async (req, res) => {
